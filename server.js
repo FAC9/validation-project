@@ -4,7 +4,7 @@ const inert = require('inert')
 
 const schema = {
   userid: joi.string().email(),
-  password: joi.string().regex(/^[a-zA-Z0-9]{6,10}$/)
+  password: joi.string().regex(/((?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*){6,}/)
 }
 
 const server = new hapi.Server();
