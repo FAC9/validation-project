@@ -1,11 +1,13 @@
 const hapi = require('hapi');
 const joi = require('joi');
 const inert = require('inert')
+
 const schema = {
-  userid: joi.string().max(5),
-  password: joi.valid('email', 'pet-name')
+  userid: joi.string().email(),
+  password: joi.string().regex(/^[a-zA-Z0-9]{6,10}$/)
 }
-let server = new hapi.Server();
+
+const server = new hapi.Server();
 
 server.connection({
   host: 'localhost',
@@ -31,10 +33,10 @@ server.register(inert, (err) => {
 })
 
 server.route({
-  path: '/login',
+  path: '/signup',
   method: 'GET',
   handler: (req, rep) => {
-    rep('hi')
+    rep('Success, your username and password are great!')
   },
   config: {
     validate: {
