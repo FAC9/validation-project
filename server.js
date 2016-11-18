@@ -1,8 +1,9 @@
 const hapi = require('hapi');
 const joi = require('joi');
+const inert = require('inert')
 const schema = {
   userid: joi.string().max(5),
-  request: joi.valid('email', 'pet-name')
+  password: joi.valid('email', 'pet-name')
 }
 let server = new hapi.Server();
 
@@ -11,8 +12,26 @@ server.connection({
   port: 8080
 });
 
+server.register(inert, (err) => {
+  if (err) { throw err; }
+    server.route([{
+      path: '/',
+      method: 'GET',
+      handler: (req, rep) => {
+        rep.file('./public/index.html')
+      }
+    },
+    {
+      path: '/{file}',
+      method: 'GET',
+      handler: (req, rep) => {
+        rep.file(`./public/${req.params.file}`)
+      }
+  }])
+})
+
 server.route({
-  path: '/',
+  path: '/login',
   method: 'GET',
   handler: (req, rep) => {
     rep('hi')
@@ -24,10 +43,7 @@ server.route({
   }
 })
 
-server.start(() => { server.inject({
-  url: '/?userid=143&request=raaar',
-  method: 'GET'
-}, (res) => {
-  console.log(res.result)
-  server.stop();
-})});
+server.start((err) => {
+  if (err) { throw err }
+  console.log(`server is running on ${server.info.uri}`)
+})
