@@ -1,0 +1,24 @@
+{
+  "name": "validation-project",
+  "version": "1.0.0",
+  "description": "Team: Cleo, John, Lucy, Marina",
+  "main": "server.js",
+  "dependencies": {
+    "hapi": "^15.2.0",
+    "inert": "^4.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FAC9/validation-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FAC9/validation-project/issues"
+  },
+  "homepage": "https://github.com/FAC9/validation-project#readme"
+}
